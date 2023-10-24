@@ -2,37 +2,39 @@
 
 int Ejercicio02::countStudents(vector<char>* students, vector<char>* sandwiches)
 {
-    return 0;
+    int studentsLeft = students->size();
+
+    for (int i = 0; i < studentsLeft; i++)
+    {
+        if (sandwiches->empty())
+        {
+            break; 
+        }
+
+        char studentPreference = (*students)[i];
+
+        while (true)
+        {
+            if (sandwiches->empty())
+            {
+                break; 
+            }
+
+            char nextSandwich = sandwiches->front();
+            sandwiches->erase(sandwiches->begin());
+
+            if (studentPreference == nextSandwich)
+            {
+                studentsLeft--;
+                break;
+            }
+            else
+            {
+                students->push_back(studentPreference);
+            }
+        }
+    }
+
+    return studentsLeft;
 }
 
-class Cola
-{
-private:
-    struct Node
-    {
-        char valor;
-        Node* next = nullptr;
-        Node(char valor) : valor(valor) {}
-    };
-    Node* head = nullptr;
-    Node* tail = nullptr;
-
-public:
-    void enque(char valor)
-    {
-        if (head == nullptr)
-        {
-            head = tail = new Node(valor);
-        }
-        else
-        {
-            tail->next = new Node(valor);
-            tail = tail->next;
-        }
-    }
-
-    void deque()
-    {
-
-    }
-};
